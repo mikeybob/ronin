@@ -92,18 +92,15 @@ class LYClass:
             album_messages = await client.get_messages(message.peer_id, limit=100)
             album = [msg for msg in album_messages if msg.grouped_id == message.grouped_id]
             if album:
-                # await client.send_file(self.config['warehouse_chat_id'], album, reply_to=message.id, caption=caption_text, parse_mode='html')
+                await client.send_file(self.config['warehouse_chat_id'], album, reply_to=message.id, caption=caption_text, parse_mode='html')
                 print("Forwarded album.")
-                print(f"{message.id}")
-                print(f"{album[0].id}")
-                print(f"{album[-1].id}")
-                last_message_id = album[-1].id  # 获取相册中最后一条消息的ID
-                print(f"Forwarded album:{last_message_id}")
-                #展开album
-                for row in album:
-                    print(f"{row}")
-
-               
+                # print(f"{message.id}")
+                # print(f"{album[0].id}")
+                # print(f"{album[-1].id}")
+                # last_message_id = album[-1].id  # 获取相册中最后一条消息的ID
+                # print(f"Forwarded album:{last_message_id}")
+                #取得阵列album中的id最大值
+                last_message_id = max(row.id for row in album)
         elif isinstance(message.media, types.MessageMediaDocument):
             mime_type = message.media.document.mime_type
             if mime_type.startswith('video/'):

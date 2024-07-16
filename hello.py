@@ -123,7 +123,7 @@ async def main():
                             last_message_id = await tgbot.forward_media_to_warehouse(client,message)
                             media_count = media_count + 1
                     tgbot.save_last_read_message_id(entity.id, last_message_id)
-                    
+                    last_read_message_id = last_message_id
 
 
             elapsed_time = time.time() - start_time

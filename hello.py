@@ -95,7 +95,7 @@ async def main():
                 print(f">Reading messages from entity {entity.id}/{entity_title} - {last_read_message_id}\n")
                 async for message in client.iter_messages(entity, min_id=last_read_message_id, limit=50, reverse=True, filter=InputMessagesFilterEmpty()):
                     print(f"A:{message.id} {last_read_message_id}")
-                    if message.id < last_read_message_id:
+                    if message.id <= last_read_message_id:
                         continue
                     print(f"B:{message.id} {last_read_message_id}")
                     last_message_id = message.id  # 初始化 last_message_id

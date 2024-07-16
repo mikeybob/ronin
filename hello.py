@@ -92,11 +92,12 @@ async def main():
 
                 print(f">Reading messages from entity {entity.id} - {last_read_message_id}\n")
                 async for message in client.iter_messages(entity, min_id=last_read_message_id, limit=50, reverse=True, filter=InputMessagesFilterEmpty()):
-                    if message.id <= last_read_message_id:
+                    print(f"A:{message.id} {last_read_message_id}")
+                    if message.id < last_read_message_id:
                         continue
-                        
+                    print(f"B:{message.id} {last_read_message_id}")
                     last_message_id = message.id  # 初始化 last_message_id
-                    
+                    print(f"C:{message.id} {last_read_message_id}")
 
 
                     if message.text:
@@ -122,8 +123,11 @@ async def main():
 
                             last_message_id = await tgbot.forward_media_to_warehouse(client,message)
                             media_count = media_count + 1
+                            print(f"D:{message.id} {last_read_message_id}")
+                            last_read_message_id = last_message_id
+                            print(f"E:{message.id} {last_read_message_id}")
                     tgbot.save_last_read_message_id(entity.id, last_message_id)
-                    last_read_message_id = last_message_id
+                    print(f"F:{message.id} {last_read_message_id}")
 
 
             elapsed_time = time.time() - start_time

@@ -92,10 +92,10 @@ class LYClass:
             album_messages = await client.get_messages(message.peer_id, limit=100)
             album = [msg for msg in album_messages if msg.grouped_id == message.grouped_id]
             if album:
-                asyncio.sleep(0.5)  # 间隔80秒
+                await asyncio.sleep(0.5)  # 间隔80秒
                 await client.send_file(self.config['warehouse_chat_id'], album, reply_to=message.id, caption=caption_text, parse_mode='html')
                 last_message_id = max(row.id for row in album)
-                print("Forwarded album:"+last_message_id)
+                print(f"Forwarded album:{last_message_id}")
                 # print(f"{message.id}")
                 # print(f"{album[0].id}")
                 # print(f"{album[-1].id}")

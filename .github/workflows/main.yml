@@ -50,7 +50,7 @@ jobs:
           } else {
             core.setFailed('No previous successful workflow run found');
           }
-
+      continue-on-error: true
 
     - name: Download artifacts
       uses: actions/download-artifact@v4
@@ -60,18 +60,6 @@ jobs:
         run-id: ${{ steps.get-previous-run-id.outputs.run_id }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
       continue-on-error: true
-
-    - name: Display structure of downloaded files
-      run: ls -R
-      
-
-    - name: Check for last_read_message_id.json
-      run: |
-        if [ -f last_read_message_id.json ]; then
-          echo "last_read_message_id.json exists."
-        else
-          echo "last_read_message_id.json does not exist."
-        fi      
 
     - name: Run Telethon script
       env:

@@ -92,7 +92,7 @@ class LYClass:
             album_messages = await client.get_messages(message.peer_id, limit=100)
             album = [msg for msg in album_messages if msg.grouped_id == message.grouped_id]
             if album:
-                await client.send_file(self.config['warehouse_chat_id'], album, reply_to=message.id, caption=caption_text, parse_mode='html')
+                # await client.send_file(self.config['warehouse_chat_id'], album, reply_to=message.id, caption=caption_text, parse_mode='html')
                 print("Forwarded album.")
                 last_message_id = album[-1].id  # 获取相册中最后一条消息的ID
         elif isinstance(message.media, types.MessageMediaDocument):

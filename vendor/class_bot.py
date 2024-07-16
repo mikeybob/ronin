@@ -94,9 +94,16 @@ class LYClass:
             if album:
                 # await client.send_file(self.config['warehouse_chat_id'], album, reply_to=message.id, caption=caption_text, parse_mode='html')
                 print("Forwarded album.")
+                print(f"{message.id}")
+                print(f"{album[0].id}")
+                print(f"{album[-1].id}")
                 last_message_id = album[-1].id  # 获取相册中最后一条消息的ID
                 print(f"Forwarded album:{last_message_id}")
-                print(f"{album}")
+                #展开album
+                for row in album:
+                    print(f"{row}")
+
+               
         elif isinstance(message.media, types.MessageMediaDocument):
             mime_type = message.media.document.mime_type
             if mime_type.startswith('video/'):

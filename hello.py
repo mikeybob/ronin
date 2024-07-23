@@ -43,8 +43,8 @@ except ValueError:
     
 #max_process_time 設為 1200 秒，即 20 分鐘
 max_process_time = 1200  # 20分钟
-max_media_count = 10  # 10个媒体文件
-
+max_media_count = 20  # 10个媒体文件
+max_count_per_chat = 5  # 每个对话的最大消息数
 
 async def main():
     await client.start(phone_number)
@@ -82,7 +82,7 @@ async def main():
             
 
             if dialog.unread_count >= 0 and (dialog.is_group or dialog.is_channel):
-                
+                count_per_chat=0;
                 
 
                 time.sleep(0.5)  # 每次请求之间等待0.5秒
@@ -147,11 +147,12 @@ async def main():
                         if tgbot.config['warehouse_chat_id']!=0 and entity.id != tgbot.config['work_chat_id'] and entity.id != tgbot.config['warehouse_chat_id']:
                             if media_count >= max_media_count:
                                 break
-
+                            if count_per_chat >= max_count_per_chat:
+                                break
                             last_message_id = await tgbot.forward_media_to_warehouse(client,message)
                             print(f"last_message_id: {last_message_id}")
                             media_count = media_count + 1
-                            
+                            count_per_chat = count_per_chat +1
                             last_read_message_id = last_message_id
                            
                     tgbot.save_last_read_message_id(entity.id, last_message_id)
@@ -170,7 +171,7 @@ async def main():
 
 
         print("Execution time is " + str(elapsed_time) + " seconds. Continuing next cycle... after 80 seconds.")
-        await asyncio.sleep(80)  # 间隔80秒
+        await asyncio.sleep(200)  # 间隔80秒
         media_count = 0
 
 with client:

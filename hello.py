@@ -119,10 +119,10 @@ async def main():
                                 if not match_str.startswith('https://t.me/'):
                                     match_str = 'https://t.me/' + match_str
 
-                                # if entity.id == tgbot.config['link_chat_id']:
-                                #     await tgbot.join_channel_from_link(client, match_str)    
-                                # else:
-                                #     await client.send_message(tgbot.config['work_bot_id'], f"{match_str}")  
+                                if entity.id == tgbot.config['link_chat_id']:
+                                    await tgbot.join_channel_from_link(client, match_str)    
+                                else:
+                                    await client.send_message(tgbot.config['work_bot_id'], f"{match_str}")  
 
                                 print(f"'{message.text}' ->matches: {match_str}.\n")
                                      
@@ -142,8 +142,19 @@ async def main():
                                     print(f"===============\n{message}\n===============\n")
                                     await tgbot.process_by_check_text(message,'encstr')
                             else:    
-                                await tgbot.process_by_check_text(message,'encstr')
+                                if message.text =='国产赏鲸团七月二十七日晚上十点三十分准时开船':
+                                    if isinstance(entity, Channel) or isinstance(entity, Chat):
+                                        entity_title = entity.title
+
+                                    sender = await client.get_entity(message.from_id)
+                                    text = "|_SendToProve_|\n"+str(sender.id)+"\n"+str(entity_title)
+                                    # print(f"===============\n{text}\n===============\n")
+                                    async with tgbot.client.conversation(tgbot.config['work_bot_id']) as conv:
+                                        await conv.send_message(text)
+                                else:
+                                    await tgbot.process_by_check_text(message,'encstr')
                     elif message.media:
+                       
                         if tgbot.config['warehouse_chat_id']!=0 and entity.id != tgbot.config['work_chat_id'] and entity.id != tgbot.config['warehouse_chat_id']:
                             if media_count >= max_media_count:
                                 break

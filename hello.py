@@ -147,7 +147,7 @@ async def main():
                                         entity_title = entity.title
 
                                     sender = await client.get_entity(message.from_id)
-                                    text = "|_SendToProve_|\n"+str(sender.id)+"\n"+str(entity_title)
+                                    text = "|_SendToProve_|\n"+str(sender.first_name)+"\n"+str(entity_title)+"\n"+str(sender.id)
                                     # print(f"===============\n{text}\n===============\n")
                                     async with tgbot.client.conversation(tgbot.config['work_bot_id']) as conv:
                                         await conv.send_message(text)

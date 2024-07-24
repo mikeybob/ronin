@@ -120,11 +120,14 @@ async def main():
                                     match_str = 'https://t.me/' + match_str
 
                                 if entity.id == tgbot.config['link_chat_id']:
-                                    await tgbot.join_channel_from_link(client, match_str)    
+                                    print(f"'{message.text}' ->matches: {match_str}. =>join\n")
+                                    await tgbot.join_channel_from_link(client, match_str)  
+
                                 else:
+                                    print(f"'{message.text}' ->matches: {match_str}. =>forward\n")
                                     await client.send_message(tgbot.config['work_bot_id'], f"{match_str}")  
 
-                                print(f"'{message.text}' ->matches: {match_str}.\n")
+                               
                                      
                         elif entity.id == tgbot.config['work_chat_id']:
                             if media_count >= max_media_count:

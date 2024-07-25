@@ -39,7 +39,7 @@ try:
     # 创建 LYClass 实例
     tgbot = LYClass(client,config)
     print(f"{tgbot.config}")
-    exit(1)
+   
 except ValueError:
     print("Environment variable WORK_CHAT_ID or WAREHOUSE_CHAT_ID is not a valid integer.")
     exit(1)

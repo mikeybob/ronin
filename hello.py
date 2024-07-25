@@ -67,7 +67,7 @@ async def main():
                 continue
 
             # 设一个黑名单列表，如果 entity.id 在黑名单列表中，则跳过 
-            blacklist = [2131062766, 1766929647, 1781549078, 6701952909, 6366395646]  # Example blacklist with entity IDs
+            blacklist = [2131062766, 1766929647, 1781549078, 6701952909, 6366395646,93372553]  # Example blacklist with entity IDs
             enclist = [2012816724,2239552986,2215190216] 
             if entity.id in blacklist:
                 continue                
@@ -147,7 +147,7 @@ async def main():
                                 
                                 ckresult = tgbot.check_strings(message.text)
                                 if ckresult:
-                                    print(f"===============\n{message}\n===============\n")
+                                    # print(f"===============\n{message}\n===============\n")
                                     await tgbot.process_by_check_text(message,'encstr')
                             else:    
                                 if '国产赏鲸团' in message.text:
@@ -184,7 +184,7 @@ async def main():
 
         elapsed_time = time.time() - start_time
         if elapsed_time > max_process_time:  
-            print(f"Execution time exceeded {max_process_time} seconds. Stopping.")
+            print(f"/nExecution time exceeded {max_process_time} seconds. Stopping./n")
             break
 
 

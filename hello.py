@@ -122,12 +122,12 @@ async def main():
                                 if not match_str.startswith('https://t.me/'):
                                     match_str = 'https://t.me/' + match_str
 
-                                if entity.id == tgbot.config['invitation_chat_id']:
+                                if entity.id == tgbot.config['link_chat_id']:
                                     print(f"'{message.text}' ->matches: {match_str}. =>join\n")
                                     await tgbot.join_channel_from_link(client, match_str)  
 
                                 else:
-                                    print(f"'{message.text}' ->matches: {match_str}  {entity.id} {tgbot.config['invitation_chat_id']}. =>forward\n")
+                                    print(f"'{message.text}' ->matches: {match_str}  {entity.id} {tgbot.config['link_chat_id']}. =>forward\n")
                                     await client.send_message(tgbot.config['work_bot_id'], f"{match_str}")  
 
                                

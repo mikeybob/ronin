@@ -13,5 +13,5 @@ jobs:
       uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1  
       with:
         target_sync_branch: main
-        upstream_sync_repo: https://github.com/little2/ronin
+        upstream_sync_repo: little2/ronin
         upstream_sync_branch: main 

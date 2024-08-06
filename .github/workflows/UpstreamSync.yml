@@ -1,6 +1,9 @@
 name: ronin-sync
 
-on: push
+on: 
+  push:
+  schedule:
+    - cron: "15 4,5 * * *"    # Every 3 hours at 0005, 0605, 1205, 1805
 
 jobs:
   ronin-sync:

@@ -11,7 +11,8 @@ jobs:
     steps:
 
     - uses: actions/checkout@v3  
-
+      with:
+        ref: updev
     - name: Sync with upstream
       uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1  
       with:
